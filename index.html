@@ -1,0 +1,313 @@
+<canvas id="canvas1"></canvas>
+<canvas id="canvas2"></canvas>
+<canvas id="canvas3"></canvas>
+<canvas id="doughnut-canvas1" height="160px"></canvas>
+<canvas id="doughnut-canvas2" height="160px"></canvas>
+
+
+			
+	
+	
+</body>
+
+<script type="text/javascript">
+////chart.js
+
+//doughnut
+var config1 = {
+	type: 'doughnut',
+	data: {
+		datasets: [{
+			data: [10, 22, 25, 6, 44],
+			backgroundColor: ['#f94d2b', '#f9872b', '#1a9c94', '#40bbb3', '#6ce0d8',],
+			borderWidth: '0.5',
+			label: '전국 체득효과 등급 비율'
+		}],
+		labels: [
+			'SSS',
+			'SS',
+			'S',
+			'A',
+			'B'
+		]
+	},
+	options: {
+		responsive: true,
+		legend: false,
+		cutoutPercentage: '45',
+		animation: {
+			animateScale: true,
+			animateRotate: true
+		},
+		plugins: {
+			labels: {
+				render: 'percentage',
+				fontColor: '#fff',
+				fontSize: 11,
+			}
+		}
+	}
+};
+
+var config2 = {
+	type: 'doughnut',
+	data: {
+		datasets: [{
+			data: [10, 22, 25, 6, 44],
+			backgroundColor: ['#f94d2b', '#f9872b', '#1a9c94', '#40bbb3', '#6ce0d8',],
+			borderWidth: '0.5',
+			label: '전국 성공률 등급 비율'
+		}],
+		labels: [
+			'SSS',
+			'SS',
+			'S',
+			'A',
+			'B'
+		]
+	},
+	options: {
+		responsive: true,
+		legend: false,
+		cutoutPercentage: '45',
+		animation: {
+			animateScale: true,
+			animateRotate: true
+		},
+		plugins: {
+			labels: {
+				render: 'percentage',
+				fontColor: '#fff',
+				fontSize: 11,
+			}
+		}
+	}
+};
+
+var config3 = {
+	type: 'doughnut',
+	data: {
+		datasets: [{
+			data: [25, 50, 25],
+			backgroundColor: ['#f94d2b', '#1a9c94', '#40bbb3'],
+			borderWidth: '0.5',
+			color: '#fff',
+			label: '전국 콘텐츠 연령별 이용률'
+		}],
+		labels: [
+			'만 3세',
+			'만 4세',
+			'만 5세',
+		]
+	},
+	options: {
+		responsive: true,
+		legend: false,
+		cutoutPercentage: '45',
+		animation: {
+			animateScale: true,
+			animateRotate: true
+		},
+		plugins: {
+			labels: {
+				render: 'percentage',
+				fontColor: '#fff',
+				fontSize: 11,
+			}
+		}
+	}
+};
+
+
+
+//bar1
+var chartData1 = {
+	labels: ['1주차','2주차','3주차','4주차'],
+	datasets: [{
+		type: 'line',
+		label: '클래스 평균',
+		borderColor: '#f34b44',
+		borderWidth: 1,
+		fill: false,
+		data: [20,40,60,80],
+	}, {
+		type: 'bar',
+		label: 'stage1',
+		backgroundColor: '#40bbb3',
+		stack: 'Stack 0',
+		data: [20,20,20,20],
+		borderColor: 'white',
+		borderWidth: 0,
+		maxBarThickness: 20,
+	},{
+		type: 'bar',
+		label: 'stage2',
+		backgroundColor: '#6ce0d8',
+		stack: 'Stack 0',
+		data: [0,20,20,20],
+		borderColor: 'white',
+		borderWidth: 0,
+		maxBarThickness: 20,
+	},{
+		type: 'bar',
+		label: 'stage3',
+		backgroundColor: '#adf3ee',
+		stack: 'Stack 0',
+		data: [0,0,20,40],
+		borderColor: 'white',
+		borderWidth: 0,
+		maxBarThickness: 20,
+		fontColor: ['green', 'white', 'red'],
+	}]
+};
+
+//bar2
+var chartData2 = {
+	labels: ['1주차','2주차','3주차','4주차'],
+	datasets: [{
+		type: 'line',
+		label: '클래스 평균',
+		borderColor: '#f34b44',
+		borderWidth: 1,
+		fill: false,
+		data: [20,40,60,80],
+	}, {
+		type: 'bar',
+		label: 'stage1',
+		backgroundColor: '#40bbb3',
+		stack: 'Stack 0',
+		data: [20,20,20,20],
+		borderColor: 'white',
+		borderWidth: 0,
+		maxBarThickness: 20,
+	},{
+		type: 'bar',
+		label: 'stage2',
+		backgroundColor: '#6ce0d8',
+		stack: 'Stack 0',
+		data: [0,20,20,20],
+		borderColor: 'white',
+		borderWidth: 0,
+		maxBarThickness: 20,
+	},{
+		type: 'bar',
+		label: 'stage3',
+		backgroundColor: '#adf3ee',
+		stack: 'Stack 0',
+		data: [0,0,20,40],
+		borderColor: 'white',
+		borderWidth: 0,
+		maxBarThickness: 20,
+		fontColor: ['green', 'white', 'red'],
+	}]
+};
+
+
+window.onload = function() {
+	//doughnut
+	var ctx1 = document.getElementById('doughnut-canvas1').getContext('2d');
+	var ctx2 = document.getElementById('doughnut-canvas2').getContext('2d');
+	var ctx3 = document.getElementById('doughnut-canvas3').getContext('2d');
+	window.myDoughnut1 = new Chart(ctx1, config1);
+	window.myDoughnut2 = new Chart(ctx2, config2);
+	window.myDoughnut3 = new Chart(ctx3, config3);
+	
+	//bar1
+	var bar1 = document.getElementById('canvas1').getContext('2d');
+	window.myMixedChart1 = new Chart(bar1, {
+		type: 'bar',
+		data: chartData1,
+		showTooltips: true,
+		options: {
+			color: '#fff',
+			responsive: true,
+			layout: {
+				padding: {
+					left: 0,
+					right: 0,
+					top: 0,
+					bottom: 0
+				}
+			},
+			plugins: {
+				labels: false,
+			},
+			legend: {
+				display: false,
+				//position: 'bottom',
+			},
+			scales: {
+				xAxes: [{
+					stacked: true,
+					//display: false,
+				}],
+				yAxes: [{
+					stacked: true, // 지수고정
+					ticks: {
+						display: true, // y축 레이블 보임
+						fontSize: '10',
+						fontColor: '#5c5c5c',
+					},
+					//display: false
+				}]
+			},
+			title: {
+				display: false,
+				text: '월간 체득점수'
+			},
+			
+		}
+	});
+	
+	//bar2
+	var bar2 = document.getElementById('canvas2').getContext('2d');
+	window.myMixedChart2 = new Chart(bar2, {
+		type: 'bar',
+		data: chartData1,
+		showTooltips: true,
+		options: {
+			color: '#fff',
+			responsive: true,
+			layout: {
+				padding: {
+					left: 0,
+					right: 0,
+					top: 0,
+					bottom: 0
+				}
+			},
+			plugins: {
+				labels: false,
+			},
+			legend: {
+				display: false,
+				//position: 'bottom',
+			},
+			scales: {
+				xAxes: [{
+					stacked: true,
+					//display: false,
+				}],
+				yAxes: [{
+					stacked: true, // 지수고정
+					ticks: {
+						display: true, // y축 레이블 보임
+						fontSize: '10',
+						fontColor: '#5c5c5c',
+					},
+					//display: false
+				}]
+			},
+			title: {
+				display: false,
+				text: '월간 성공률 비교'
+			},
+			
+		}
+	});
+	
+
+};
+
+</script>
+</html>
