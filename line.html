@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Doughnut Chart</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+	<script src="moment-with-locales.min.js"></script>
+	<script src="chart.min.js"></script>
+	<script src="utils.js"></script>
+	<style>
+	canvas {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+
+	</style>
+</head>
+
+<body>
+	<div style="width:100%; height:250px;">
+		<canvas id="canvas2"></canvas>
+	</div>
+
+
+
+
+<script>
+var monthdays = [];
+moment.locale('ko');   
+for(var i = 0 ; i < 31; i++){
+	monthdays.push(moment("2021-03-01").add(i, 'days').format("YYYY-MM-DD")); 
+}
+
+var lineData = {
+		label: 'pc',
+		datasets: [{
+			type: 'line',
+			label: 'stage1',
+			fill: false,
+			borderColor: '#FF7605',
+			borderWidth: 2,
+			data: [{
+				x: monthdays[0],
+				y: '0'
+			}, {
+				x: monthdays[2],
+				y: '5'
+			}, {
+				x: monthdays[4],
+				y: '10'
+			}, {
+				x: monthdays[15],
+				y: '10'
+			}, {
+				x: monthdays[30],
+				y: '20'
+			}],
+		}]
+}
+	
+
+var line = document.getElementById('canvas2').getContext('2d');
+window.myLine = new Chart(line, {
+	
+	data: lineData,
+	options: {
+		color: '#fff',
+		responsive: true,
+		maintainAspectRatio: false,
+		legend: {
+			display: false,
+			//position: 'bottom',
+		},
+		layout: {
+			padding: {
+				left: 0,
+				right: 0,
+				top: 20,
+				bottom: 0
+			}
+		},
+		scales: {
+			xAxes: [{
+				type: 'time',
+					time: {
+							unit: 'day',
+							displayFormats:{
+								'day': 'DD'
+							}
+						},
+				display: true,
+				scaleLabel: {
+					display: false,
+					labelString: 'Date'
+				},
+				ticks: {
+					major: {
+						fontStyle: 'bold',
+						fontColor: '#FF0000'
+					}
+				}
+			}],
+			yAxes: [{
+				display: true,
+				scaleLabel: {
+					display: false,
+					labelString: 'value'
+				}
+			}]
+		},
+		title: {
+			display: false,
+			text: 'Chart.js Time Point Data'
+		},
+	}
+});
+
+		
+	</script>
+</body>
+
+</html>
